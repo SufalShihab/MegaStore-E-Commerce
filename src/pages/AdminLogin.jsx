@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api/axios';
 import { ShieldAlert, Lock, Mail, Key } from 'lucide-react';
 
 const AdminLogin = () => {
@@ -17,7 +17,7 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/admin-login', {
+      const response = await API.post('/auth/admin-login', {
         email,
         password,
         secretKey,

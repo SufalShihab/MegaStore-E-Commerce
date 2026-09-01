@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/useCartStore';
 import { ShoppingBag, Truck, CreditCard, ShieldCheck, ArrowRight, Trash2 } from 'lucide-react';
-import axios from 'axios';
+import API from '../api/axios';
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ const CheckoutPage = () => {
     // ক্যাশ অন ডেলিভারির জন্য সরাসরি ব্যাকএন্ডে API কল
     setIsSubmitting(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/orders', orderPayload);
+      const response = await API.post('/orders', orderPayload);
       
       if (response.status === 201 || response.status === 200) {
         clearCart();

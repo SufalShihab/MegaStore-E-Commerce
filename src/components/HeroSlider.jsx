@@ -62,7 +62,7 @@ const HeroSlider = () => {
       {/* Shop Now ওভারল্যাপ বাটন (বাম পাশে নিচে ছবির ওপর) */}
       <div className="absolute bottom-4 left-4 sm:left-8 z-20">
         <a 
-          href={currentBanner.link || '#'} 
+          href={currentBanner?.link || '#'} 
           className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-lg shadow-md text-xs sm:text-sm transition-transform transform hover:scale-105 inline-block"
         >
           Shop Now
@@ -86,13 +86,13 @@ const HeroSlider = () => {
 
       {/* ডট ইনডিকেটর */}
       <div className="absolute bottom-3 right-6 flex gap-1.5 z-20">
-        {banners.map((_, index) => (
+        {(banners?.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-5 sm:w-6 bg-amber-400' : 'w-1.5 sm:w-2 bg-white/60'}`}
           />
-        ))}
+        )))}
       </div>
 
     </div>

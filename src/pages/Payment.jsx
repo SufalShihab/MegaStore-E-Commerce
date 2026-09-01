@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/useCartStore';
 import { CheckCircle2, XCircle, ShieldCheck, CreditCard } from 'lucide-react';
-import axios from 'axios';
+import API from '../api/axios';
 
 const Payment = () => {
   const location = useLocation();
@@ -37,7 +37,7 @@ const Payment = () => {
       };
 
       // 🔥 ব্যাকএন্ডের MongoDB তে অর্ডার সেভ করার জন্য API কল
-      const response = await axios.post('http://localhost:5000/api/orders', finalOrderPayload);
+      const response = await API.post('/orders', finalOrderPayload);
 
       if (response.status === 201 || response.status === 200) {
         clearCart();

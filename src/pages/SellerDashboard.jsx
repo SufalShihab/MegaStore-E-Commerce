@@ -104,7 +104,7 @@ const SellerDashboard = () => {
                       <img src={item.image} alt={item.title} className="w-12 h-12 object-cover rounded-lg" />
                     </td>
                     <td className="py-3 px-4 font-semibold truncate max-w-xs">{item.title}</td>
-                    <td className="py-3 px-4 text-xs bg-gray-100 rounded-full w-max px-2 py-1">{item.category}</td>
+                    <td className="py-2 px-3 text-xs bg-gray-100 rounded-full w-max">{item.category}</td>
                     <td className="py-3 px-4 font-bold text-primary">৳{item.price}</td>
                     <td className="py-3 px-4">{item.stock} টি</td>
                     <td className="py-3 px-4 text-right">

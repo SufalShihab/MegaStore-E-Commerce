@@ -122,7 +122,7 @@ const AddProduct = () => {
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
-            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider text-amber-600 border-b pb-3">মৌলিক তথ্য</h2>
+            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider  border-b pb-3">মৌলিক তথ্য</h2>
             
             <div>
               <label className="block text-xs font-bold text-gray-700 mb-1.5">প্রোডাক্টের নাম *</label>
@@ -233,7 +233,7 @@ const AddProduct = () => {
           </div>
 
           <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
-            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider text-amber-600 border-b pb-3 flex items-center gap-2">
+            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider  border-b pb-3 flex items-center gap-2">
               <ImageIcon className="w-4 h-4" /> ছবি ও মিডিয়া
             </h2>
 
@@ -275,7 +275,7 @@ const AddProduct = () => {
               ) : (
                 <label 
                   htmlFor="fileInput" 
-                  className="border-2 border-dashed border-gray-200 hover:border-amber-400 transition rounded-2xl p-8 text-center bg-slate-50/50 cursor-pointer flex flex-col items-center justify-center block"
+                  className="border-2 border-dashed border-gray-200 hover:border-amber-400 transition rounded-2xl p-8 text-center bg-slate-50/50 cursor-pointer  flex-col items-center justify-center block"
                 >
                   <Upload className="w-8 h-8 text-amber-500 mb-2" />
                   <p className="text-xs font-bold text-slate-700">ফাইল নির্বাচন করতে ক্লিক করুন</p>
@@ -307,7 +307,7 @@ const AddProduct = () => {
 
         <div className="space-y-6">
           <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
-            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider text-amber-600 border-b pb-3 flex items-center gap-2">
+            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider  border-b pb-3 flex items-center gap-2">
               <Truck className="w-4 h-4" /> ডেলিভারি ও সার্ভিস সেটিংস
             </h2>
 
@@ -359,7 +359,7 @@ const AddProduct = () => {
           </div>
 
           <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
-            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider text-amber-600 border-b pb-3 flex items-center gap-2">
+            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider  border-b pb-3 flex items-center gap-2">
               <Tag className="w-4 h-4" /> এসইও ট্যাগ/অন্যান্য নাম (কী-ওয়ার্ড)
             </h2>
 
