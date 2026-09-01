@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', // আপনার ব্যাকএন্ডের বেস ইউআরএল
+  baseURL:import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000/api', // আপনার ব্যাকএন্ডের বেস ইউআরএল
 });
 
 // 🛠️ Request Interceptor: প্রতিটি রিকোয়েস্টে টোকেন অটোমেটিক যুক্ত করার জন্য
