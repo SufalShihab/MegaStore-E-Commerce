@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import API from '../api/axios';
 
 const HeroSlider = () => {
@@ -36,9 +37,10 @@ const HeroSlider = () => {
     setCurrentIndex((prev) => (prev + 1) % banners.length);
   };
 
+  // লোডিং স্টেটে স্কেলিটন বা লোডার
   if (banners.length === 0) {
     return (
-      <div className="w-full h-[200px] sm:h-[300px] bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-medium">
+      <div className="w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[16/5] bg-slate-800 animate-pulse flex items-center justify-center text-slate-400 text-xs font-medium">
         হিরো ব্যানার লোড হচ্ছে...
       </div>
     );
@@ -47,52 +49,58 @@ const HeroSlider = () => {
   const currentBanner = banners[currentIndex];
 
   return (
-    // w-full এবং m-0 p-0 নিশ্চিত করা হয়েছে যাতে কোনো ফাঁকা না থাকে
-    <div className="relative w-full overflow-hidden bg-slate-900 group">
+    <div className="relative w-full overflow-hidden bg-slate-900 group select-none">
       
-      {/* ব্যানার ইমেজ: object-contain দিলে ছবি কাটবে না, পুরোটা দেখা যাবে */}
-      <div className="w-full h-[140px] sm:h-[200px] md:h-[260px] lg:h-[340px] flex items-center justify-center">
+      {/* ব্যানার ইমেজ কন্টেইনার (Aspect Ratio নিশ্চিত করা হয়েছে) */}
+      <div className="w-full h-[160px] xs:h-[200px] sm:h-[280px] md:h-[350px] lg:h-[420px] relative overflow-hidden flex items-center justify-center">
         <img 
           src={currentBanner.image} 
-          alt="Hero Banner" 
-          className="w-full h-full object-fill md:object-cover transition-all duration-500"
+          alt={`Hero Banner ${currentIndex + 1}`} 
+          className="w-full h-full object-cover transition-all duration-700 ease-in-out"
         />
+        {/* গাঢ় ওভারলে যা টেক্সট/বাটন স্পষ্টভাবে দেখাবে */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
       </div>
 
-      {/* Shop Now ওভারল্যাপ বাটন (বাম পাশে নিচে ছবির ওপর) */}
-      <div className="absolute bottom-4 left-4 sm:left-8 z-20">
-        <a 
-          href={currentBanner?.link || '#'} 
-          className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-1.5 sm:px-6 sm:py-2.5 rounded-lg shadow-md text-xs sm:text-sm transition-transform transform hover:scale-105 inline-block"
+      {/* Shop Now বাটন */}
+      <div className="absolute bottom-3 left-3 xs:bottom-4 xs:left-4 sm:bottom-6 sm:left-8 z-20">
+        <Link 
+          to={currentBanner?.link || '#'} 
+          className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-3 py-1.5 xs:px-4 xs:py-2 sm:px-6 sm:py-2.5 rounded-lg shadow-lg text-[11px] xs:text-xs sm:text-sm transition-transform transform active:scale-95 hover:scale-105 inline-flex items-center gap-1"
         >
           Shop Now
-        </a>
+        </Link>
       </div>
 
-      {/* নেভিগেশনArrows */}
+      {/* নেভিগেশন Arrows (মোবাইলে কিছুটা স্বচ্ছ দেখাবে, ডেসটপে হভার করলে স্পষ্ট হবে) */}
       <button 
         onClick={prevSlide}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-1.5 sm:p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer z-20"
+        aria-label="Previous Slide"
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/75 text-white p-1.5 sm:p-2.5 rounded-full opacity-70 group-hover:opacity-100 transition-all cursor-pointer z-20 active:scale-90"
       >
-        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
       </button>
 
       <button 
         onClick={nextSlide}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-1.5 sm:p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer z-20"
+        aria-label="Next Slide"
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/75 text-white p-1.5 sm:p-2.5 rounded-full opacity-70 group-hover:opacity-100 transition-all cursor-pointer z-20 active:scale-90"
       >
-        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
       </button>
 
       {/* ডট ইনডিকেটর */}
-      <div className="absolute bottom-3 right-6 flex gap-1.5 z-20">
-        {(banners?.map((_, index) => (
+      <div className="absolute bottom-3 right-3 xs:right-4 sm:right-8 flex items-center gap-1 sm:gap-1.5 z-20 bg-black/30 backdrop-blur-xs px-2 py-1 rounded-full">
+        {banners.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-5 sm:w-6 bg-amber-400' : 'w-1.5 sm:w-2 bg-white/60'}`}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
+              currentIndex === index ? 'w-4 sm:w-6 bg-amber-400' : 'w-1.5 sm:w-2 bg-white/50 hover:bg-white/80'
+            }`}
           />
-        )))}
+        ))}
       </div>
 
     </div>

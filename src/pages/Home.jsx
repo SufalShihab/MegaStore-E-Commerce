@@ -16,13 +16,11 @@ const Home = () => {
       setError(null);
 
       try {
-        // সরাসরি MongoDB (Backend API) থেকে ডাটা কল করা হচ্ছে
         const { data } = await API.get(`/products${location.search}`);
         
         if (Array.isArray(data)) {
           setProducts(data);
         } else if (data.products && Array.isArray(data.products)) {
-          // যদি রেসপন্সে { products: [...] } আকারে আসে
           setProducts(data.products);
         } else {
           setProducts([]);
@@ -47,7 +45,7 @@ const Home = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       
       {/* Hero Banner */}
       <div className="w-full">
@@ -55,14 +53,20 @@ const Home = () => {
       </div>
 
       {/* Product Section */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">সাম্প্রতিক প্রোডাক্ট সমূহ</h2>
+      <div className="px-2 sm:px-4">
+        <h2 className="text-lg sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
+          সাম্প্রতিক প্রোডাক্ট সমূহ
+        </h2>
         
         {products.length === 0 ? (
-          <p className="text-gray-500">কোনো প্রোডাক্ট পাওয়া যায়নি।</p>
+          <p className="text-gray-500 text-center py-10">কোনো প্রোডাক্ট পাওয়া যায়নি।</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
+          /* 
+             এখানে items-start যোগ করা হয়েছে যেন কার্ডগুলো লম্বায় স্ট্রেচ না হয়ে 
+             নিজের আঁকারেই থাকে।
+          */
+         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4 lg:gap-5 items-stretch">
+             {products.map((product) => (
               <ProductCard key={product._id || product.id} product={product} />
             ))}
           </div>
